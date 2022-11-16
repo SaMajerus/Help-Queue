@@ -29,8 +29,8 @@ class TicketControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null; 
     if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewTicketForm />;
-      buttonText = "Return to Ticket List"; 
+      currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />  /* new code in this line */
+      buttonText = "Return to Ticket List";
     } else {
       currentlyVisibleState = <TicketList ticketList = {this.state.mainTicketList} />;
       buttonText = "Add Ticket"; 
