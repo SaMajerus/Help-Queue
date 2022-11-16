@@ -9,9 +9,11 @@ class TicketControl extends React.Component {
     this.state = {
       formVisibleOnPage: false
     };
+    //this.handleClick = this.handleClick.bind(this);  //Translation:  "Whenever 'this.handleClick' is called, it should have the current context of 'this' bound to it. Because this line of code is inside the constructor, this is an instance of the class itself, which is exactly what we need. That way, when this.handleClick is called in the DOM, our application still knows what this should be", (Lsn 24).  
   }
 
-  handleClick = () => {
+  //handleClick() {
+  handleClick = () => {   //"...we don't need to use 'bind' anymore [b/c] arrow functions automatically bind functions to their [current] lexical scope", (Lsn 24). 
     this.setState(prevState => ({
       formVisibleOnPage: !prevState.formVisibleOnPage
     }));
