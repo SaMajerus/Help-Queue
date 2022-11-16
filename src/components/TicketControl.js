@@ -18,6 +18,13 @@ class TicketControl extends React.Component {
     }));
   }
 
+  /* Handles the form submission process (for adding a new ticket to the list) */
+  handleAddingNewTicketToList = (newTicket) => {   
+    const newMainTicketList = this.state.mainTicketList.concat(newTicket);
+    this.setState({mainTicketList: newMainTicketList,
+                  formVisibleOnPage: false });
+  }
+
   render(){
     let currentlyVisibleState = null;
     let buttonText = null; 
