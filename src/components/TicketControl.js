@@ -21,8 +21,9 @@ class TicketControl extends React.Component {
     if (this.state.selectedTicket != null) {
       this.setState({
         formVisibleOnPage: false,
-        selectedTicket: null
-      });   {/* This first conditional enables the Method to handle returning to the Queue from the Ticket Detail page. */}
+        selectedTicket: null,
+        editing: false // new code
+      });   {/* This first conditional enables the Method to handle returning to the Queue from the Ticket Detail page (and/or a component which is accessed via the Details page, like the Edit form). */} 
     } else {
       this.setState(prevState => ({
         formVisibleOnPage: !prevState.formVisibleOnPage,
@@ -58,12 +59,24 @@ class TicketControl extends React.Component {
     this.setState({editing: true});
   }
 
+  /* This method allows a given ticket to be Updated/Edited using the Edit form. */
+  handleEditingTicketInList = (ticketToEdit) => {
+    const editedMainTicketList = this.state.mainTicketList
+      .filter(ticket => ticket.id !== this.state.selectedTicket.id)
+      .concat(ticketToEdit);
+    this.setState({
+        mainTicketList: editedMainTicketList,
+        editing: false,
+        selectedTicket: null
+      });
+  }
+
   render(){
     let currentlyVisibleState = null;
     let buttonText = null; 
     
     if (this.state.editing ) {      
-      currentlyVisibleState = <EditTicketForm ticket = {this.state.selectedTicket} />
+      currentlyVisibleState = <EditTicketForm ticket = {this.state.selectedTicket} onEditTicket = {this.handleEditingTicketInList} />  //Passes methods down to 'EditTicketForm' component as Props. 
       buttonText = "Return to Ticket List";
     } else if (this.state.selectedTicket != null) {
       currentlyVisibleState = 
