@@ -14,10 +14,18 @@ class TicketControl extends React.Component {
     };  
   }
 
+  /* Handles mouse-click events. */
   handleClick = () => {  
-    this.setState(prevState => ({
-      formVisibleOnPage: !prevState.formVisibleOnPage
-    }));
+    if (this.state.selectedTicket != null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedTicket: null
+      });   {/* This first conditional enables the Method to handle returning to the Queue from the Ticket Detail page. */}
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage,
+      }));
+    }
   }
 
   /* Handles the form submission process (for adding a new ticket to the list). */
